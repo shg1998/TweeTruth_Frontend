@@ -29,7 +29,7 @@ const ScrollToTop = () => {
     element.scrollIntoView({
       behavior: "smooth",
       block: "end",
-      inline: "nearest",
+      inline: "end",
     });
   };
 

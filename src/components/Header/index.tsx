@@ -35,6 +35,8 @@ const Header = ({ t }: any) => {
       });
       setVisibility(false);
     };
+
+    
     return (
       <>
         <CustomNavLinkSmall onClick={() => scrollTo("about")}>

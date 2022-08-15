@@ -14,6 +14,7 @@ export const Title = styled("h4")`
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;
   }
+  
 `;
 
 export const NavLink = styled(Link)`
@@ -27,6 +28,7 @@ export const NavLink = styled(Link)`
   &:focus {
     color: #15418e;
   }
+  
 `;
 
 export const Extra = styled("section")`
@@ -36,6 +38,7 @@ export const Extra = styled("section")`
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 2rem;
+  
 `;
 
 export const LogoContainer = styled("div")`
@@ -66,6 +69,7 @@ export const Large = styled(Link)<any>`
     text-underline-position: under;
     text-decoration: rgb(255, 130, 92) wavy underline;
   }
+  
 `;
 
 export const Chat = styled("p")`
@@ -80,11 +84,13 @@ export const Chat = styled("p")`
     border-bottom: 1px solid rgb(255, 130, 92);
     color: rgb(255, 130, 92);
   }
+  
 `;
 
 export const Empty = styled("div")`
   position: relative;
   height: 53px;
+  
 `;
 
 export const FooterContainer = styled("div")`
@@ -142,7 +148,8 @@ export const Label = styled("label")`
   color: #18216d;
   display: block;
   margin-bottom: 2rem;
-  font-family: "Motiva Sans Bold", serif;
+  font-family: vazir, yekan, yekannums, Helvetica Neue, Helvetica, Arial,'Motiva Sans Light', sans-serif;
+
 
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;

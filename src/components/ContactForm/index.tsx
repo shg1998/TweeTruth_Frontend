@@ -28,12 +28,12 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
     <ContactContainer id={id}>
       <Row justify="space-between" align="middle">
         <Col lg={12} md={11} sm={24} xs={24}>
-          <Slide direction="left">
+          <Zoom direction="left">
             <Block title={title} content={content} />
-          </Slide>
+          </Zoom>
         </Col>
         <Col lg={12} md={12} sm={24} xs={24}>
-          <Slide direction="right">
+          <Zoom direction="right">
             <FormGroup autoComplete="off" onSubmit={handleSubmit}>
               <Col span={24}>
                 <Input
@@ -68,7 +68,7 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
                 <Button name="submit">{t("Submit")}</Button>
               </ButtonContainer>
             </FormGroup>
-          </Slide>
+          </Zoom>
         </Col>
       </Row>
     </ContactContainer>

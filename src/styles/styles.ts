@@ -3,6 +3,34 @@ import { createGlobalStyle } from "styled-components";
 export const Styles = createGlobalStyle`
 
     @font-face {
+        font-family: "vazir";
+        src: url("/fonts/vazir.woff") format("woff");
+        font-style: small;
+        font-weight: small;
+        font-size: 10px;
+    
+        unicode-range: U+0600-06FF;
+    }
+    
+    @font-face {
+        font-family: "yekan";
+        src: url("/fonts/web_Yekan.woff") format("woff");
+        font-style: small;
+        font-weight: small;
+        font-size: 10px;
+    
+        unicode-range: U+0600-06FF;
+    }
+    
+    @font-face {
+        font-family: "yekannums";
+        src: url("/fonts/yekannumbers.woff") format("woff");
+        font-style: small;
+        font-weight: small;
+        font-size: 10px;
+    }
+
+    @font-face {
         font-family: "Motiva Sans Light";
         src: url("/fonts/Motiva-Sans-Light.ttf") format("truetype");
         font-style: normal;
@@ -14,11 +42,14 @@ export const Styles = createGlobalStyle`
         font-style: normal;
     }
 
+    *{
+        font-family: vazir, yekan, yekannums, Helvetica Neue, Helvetica, Arial,'Motiva Sans Light', sans-serif;
+    }
 
     body,
     html,
     a {
-        font-family: 'Motiva Sans Light', sans-serif;
+        font-family: vazir, yekan, yekannums, Helvetica Neue, Helvetica, Arial,'Motiva Sans Light', sans-serif !important;
     }
 
 
@@ -56,8 +87,9 @@ export const Styles = createGlobalStyle`
     h3,
     h4,
     h5,
-    h6 {
-        font-family: 'Motiva Sans Bold', serif;
+    h6,
+    label {
+        font-family: vazir, yekan, yekannums, Helvetica Neue, Helvetica, Arial,'Motiva Sans Light', sans-serif;
         color: #18216d;
         font-size: 56px;
         line-height: 1.18;
