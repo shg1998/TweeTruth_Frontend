@@ -99,11 +99,11 @@ const Footer = ({ t }: any) => {
                   />
                 </LanguageSwitch>
                 <LanguageSwitch onClick={() => handleChange("fa")}>
-                  <SvgIcon
-                    src="spain.svg"
+                  <img
+                    src="/img/icons/flag-iran.png"
                     aria-label="homepage"
-                    width="30px"
-                    height="30px"
+                    width="45px"
+                    height="34px"
                   />
                 </LanguageSwitch>
               </LanguageSwitchContainer>
