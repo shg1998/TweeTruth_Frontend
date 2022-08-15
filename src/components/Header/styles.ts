@@ -50,7 +50,7 @@ export const Burger = styled("div")`
   display: none;
 
   svg {
-    fill: #2e186a;
+    fill: #1DA1F2;
   }
 `;
 
