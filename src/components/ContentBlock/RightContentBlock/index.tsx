@@ -18,6 +18,7 @@ const RightBlock = ({
   icon,
   t,
   id,
+  onClick,
 }: ContentBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
@@ -41,7 +42,10 @@ const RightBlock = ({
                         key={id}
                         color={item.color}
                         fixedWidth={true}
-                        onClick={() => scrollTo("about")}
+                        onClick={() => {
+                          if (onClick !== undefined) onClick();
+                          else scrollTo("about");
+                        }}
                       >
                         {t(item.title)}
                       </Button>

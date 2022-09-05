@@ -15,10 +15,11 @@ import {
   Outline,
   Span,
 } from "./styles";
+import { useHistory } from "react-router-dom";
 
 const Header = ({ t }: any) => {
   const [visible, setVisibility] = useState(false);
-
+  const history = useHistory();
   const showDrawer = () => {
     setVisibility(!visible);
   };
@@ -36,18 +37,32 @@ const Header = ({ t }: any) => {
       setVisibility(false);
     };
 
-    
     return (
       <>
-        <CustomNavLinkSmall onClick={() => scrollTo("about")}>
+        <CustomNavLinkSmall
+          onClick={() => {
+            history.push("/");
+            setTimeout(() => {
+              scrollTo("about");
+            }, 100);
+          }}
+        >
           <Span>{t("About")}</Span>
         </CustomNavLinkSmall>
-        <CustomNavLinkSmall onClick={() => scrollTo("contact")}>
+        <CustomNavLinkSmall
+          onClick={() => {
+            history.push("/");
+            setTimeout(() => {
+              scrollTo("contact");
+            }, 100);
+          }}
+        >
           <Span>{t("Contact")}</Span>
         </CustomNavLinkSmall>
         <CustomNavLinkSmall
           style={{ width: "180px" }}
-          onClick={() => console.log("login Clicked")}>
+          onClick={() => history.push("/login")}
+        >
           <Span>
             <Button>{t("Login")}</Button>
           </Span>
