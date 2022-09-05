@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import singinImg from "../../assets/images/login.png";
 const Container = lazy(() => import("../../common/Container"));
 
-
 const Login = () => {
-
   const { Content } = Layout;
   const { Title } = Typography;
 
@@ -23,8 +21,8 @@ const Login = () => {
       <Content className="signin">
         <Row gutter={[24, 0]} justify="space-around">
           <Col
-            xs={{ span: 24, offset: 0 }}
-            lg={{ span: 6, offset: 2 }}
+            xs={{ span: 24}}
+            lg={{ span: 12}}
             md={{ span: 12 }}
           >
             <Title className="mb-15">Sign In</Title>
@@ -46,9 +44,8 @@ const Login = () => {
                     required: true,
                     message: "Please input your username!",
                   },
-                ]}
-              >
-                <Input placeholder="Email" />
+                ]}>
+                <Input placeholder="Username" />
               </Form.Item>
 
               <Form.Item
@@ -61,7 +58,6 @@ const Login = () => {
                     message: "Please input your password!",
                   },
                 ]}>
-                    
                 <Input placeholder="Password" />
               </Form.Item>
 
@@ -76,7 +72,7 @@ const Login = () => {
               </Form.Item>
               <p className="font-semibold text-muted">
                 Don't have an account?{" "}
-                <Link to="/sign-up" className="text-dark font-bold">
+                <Link to="/register" className="text-dark font-bold">
                   Sign Up
                 </Link>
               </p>
@@ -89,7 +85,7 @@ const Login = () => {
             lg={{ span: 12 }}
             md={{ span: 12 }}
           >
-              <img src={singinImg} alt=""  width={400}/>
+            <img src={singinImg} alt="" width={400} />
           </Col>
         </Row>
       </Content>
