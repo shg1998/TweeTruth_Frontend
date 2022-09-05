@@ -24,5 +24,14 @@
   "Name" : "Name",
   "Your Name": "Your Name",
   "Email" : "Email",
-  "Your Email": "Your Email"
+  "Your Email": "Your Email",
+  "Definition" : "TweeTruth , Tool for Evaluate Twitter Accounts Trustworthiness",
+  "Definition Description" : "Easily enter your desired account to see its Influence score after performing calculations and running algorithms",
+  "Contact form":"Contact Form",
+  "Contact form Description":"Contact With Us with this Form",
+  "Ready made sections":"Plan for next steps",
+  "Ready made sections Description" : "Adding the part of sentiment analysis in order to increase the accuracy of the algorithm output",
+  "About Project":"About Project",
+  "About Project Description":"This project was developed by Mohammad Hossein Nejadhandi, a bachelor's student of computer engineering at Amirkabir University of Technology, in order to develop his final bachelor's project.",
+  "Login":"Login"
 }
