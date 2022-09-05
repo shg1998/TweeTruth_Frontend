@@ -28,11 +28,10 @@ const Register = () => {
 
   return (
     <Container>
-      <Content className="p-0">
+      <Content >
         <Row gutter={[24, 0]} justify="space-around">
           <Col xs={{ span: 24 }} lg={{ span: 12 }} md={{ span: 12 }}>
             <Card
-              className="card-signup header-solid h-full ant-card pt-0"
               title={<h5>Register Now !</h5>}
               bordered={false}
             >
@@ -41,15 +40,14 @@ const Register = () => {
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
-                className="row-col"
               >
                 <Form.Item
-                  name="Name"
+                  name="Username"
                   rules={[
                     { required: true, message: "Please input your username!" },
                   ]}
                 >
-                  <Input placeholder="Name" />
+                  <Input placeholder="Username" />
                 </Form.Item>
                 <Form.Item
                   name="email"
@@ -60,18 +58,26 @@ const Register = () => {
                   <Input placeholder="email" />
                 </Form.Item>
                 <Form.Item
+                  name="FullName"
+                  rules={[
+                    { required: true, message: "Please input your fullname!" },
+                  ]}
+                >
+                  <Input placeholder="Name" />
+                </Form.Item>
+                <Form.Item
                   name="password"
                   rules={[
                     { required: true, message: "Please input your password!" },
                   ]}
                 >
-                  <Input placeholder="Passwoed" />
+                  <Input placeholder="Password"  type="password"/>
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">
                   <Checkbox>
                     I agree the{" "}
-                    <a href="#pablo" className="font-bold text-dark">
+                    <a href="#pablo">
                       Terms and Conditions
                     </a>
                   </Checkbox>
@@ -87,16 +93,15 @@ const Register = () => {
                   </Button>
                 </Form.Item>
               </Form>
-              <p className="font-semibold text-muted text-center">
+              <p >
                 Already have an account?{" "}
-                <Link to="/login" className="font-bold text-dark">
+                <Link to="/login">
                   Sign In
                 </Link>
               </p>
             </Card>
           </Col>
           <Col
-            className="sign-img"
             style={{ padding: 12 }}
             xs={{ span: 24 }}
             lg={{ span: 12 }}

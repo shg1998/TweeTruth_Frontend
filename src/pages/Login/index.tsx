@@ -18,25 +18,17 @@ const Login = () => {
 
   return (
     <Container>
-      <Content className="signin">
+      <Content>
         <Row gutter={[24, 0]} justify="space-around">
-          <Col
-            xs={{ span: 24}}
-            lg={{ span: 12}}
-            md={{ span: 12 }}
-          >
-            <Title className="mb-15">Sign In</Title>
-            <Title className="font-regular text-muted" level={5}>
-              Enter your username and password to sign in
-            </Title>
+          <Col xs={{ span: 24 }} lg={{ span: 12 }} md={{ span: 12 }}>
+            <Title>Sign In</Title>
+            <Title level={5}>Enter your username and password to sign in</Title>
             <Form
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               layout="vertical"
-              className="row-col"
             >
               <Form.Item
-                className="username"
                 label="username"
                 name="username"
                 rules={[
@@ -44,12 +36,12 @@ const Login = () => {
                     required: true,
                     message: "Please input your username!",
                   },
-                ]}>
+                ]}
+              >
                 <Input placeholder="Username" />
               </Form.Item>
 
               <Form.Item
-                className="username"
                 label="Password"
                 name="password"
                 rules={[
@@ -57,7 +49,8 @@ const Login = () => {
                     required: true,
                     message: "Please input your password!",
                   },
-                ]}>
+                ]}
+              >
                 <Input placeholder="Password" />
               </Form.Item>
 
@@ -70,16 +63,12 @@ const Login = () => {
                   SIGN IN
                 </Button>
               </Form.Item>
-              <p className="font-semibold text-muted">
-                Don't have an account?{" "}
-                <Link to="/register" className="text-dark font-bold">
-                  Sign Up
-                </Link>
+              <p>
+                Don't have an account? <Link to="/register">Sign Up</Link>
               </p>
             </Form>
           </Col>
           <Col
-            className="sign-img"
             style={{ padding: 12 }}
             xs={{ span: 24 }}
             lg={{ span: 12 }}
