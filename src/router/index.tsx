@@ -10,8 +10,8 @@ import Login from "../pages/Login";
 import { useUserState } from "../context/UserContext";
 
 const Router = () => {
-  var isAuthenticated: boolean = useUserState();
-
+  var {isAuthenticated} = useUserState();
+  
   return (
     <Suspense fallback={null}>
       <Styles />

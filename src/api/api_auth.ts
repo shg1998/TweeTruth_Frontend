@@ -17,7 +17,7 @@ export const registerApi = (
 export const loginApi = (username: string, password: string) => {
   return getAxiosBase()
     .post("/Users/Token", { username, password })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((err) => {
       throw new Error(err.response.data);
     });

@@ -5,13 +5,16 @@ import "antd/dist/antd.css";
 
 import Router from "./router";
 import i18n from "./translation";
+import { UserProvider } from "./context/UserContext";
 
 const App = () => (
-  <BrowserRouter>
-    <I18nextProvider i18n={i18n}>
-      <Router />
-    </I18nextProvider>
-  </BrowserRouter>
+  <UserProvider>
+    <BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <Router />
+      </I18nextProvider>
+    </BrowserRouter>
+  </UserProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
