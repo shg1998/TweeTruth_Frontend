@@ -7,9 +7,10 @@ import { Styles } from "../styles/styles";
 import React from "react";
 import Dashboard from "../pages/dashboard";
 import Login from "../pages/Login";
+import { useUserState } from "../context/UserContext";
 
 const Router = () => {
-  var isAuthenticated: boolean = false; //useUserState();
+  var isAuthenticated: boolean = useUserState();
 
   return (
     <Suspense fallback={null}>
@@ -26,7 +27,7 @@ const Router = () => {
             />
           );
         })}
-        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/app" component={Dashboard} />
         <PublicRoute path="/login" component={Login} />
       </Switch>
       {!isAuthenticated && <Footer />}
@@ -41,7 +42,7 @@ const Router = () => {
           isAuthenticated ? (
             <Redirect
               to={{
-                pathname: "/dashboard",
+                pathname: "/app",
               }}
             />
           ) : (
