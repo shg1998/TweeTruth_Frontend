@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -8,19 +9,32 @@ import {
   Layout,
   Row,
   Typography,
+  notification 
 } from "antd";
 import { lazy } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import registerImg from "../../assets/images/register.png";
 import { registerUser, useUserDispatch } from "../../context/UserContext";
 const Container = lazy(() => import("../../common/Container"));
 
 const Register = () => {
   var userDispatch = useUserDispatch();
-
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  
   const onFinish = (values: any) => {
     console.log("Success:", values);
-    // registerUser(userDispatch,)
+    registerUser(
+      userDispatch,
+      values.Username,
+      values.email,
+      values.password,
+      values.FullName,
+      history,
+      setIsLoading,
+      setError
+    );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -32,13 +46,10 @@ const Register = () => {
 
   return (
     <Container>
-      <Content >
+      <Content>
         <Row gutter={[24, 0]} justify="space-around">
           <Col xs={{ span: 24 }} lg={{ span: 12 }} md={{ span: 12 }}>
-            <Card
-              title={<h5>Register Now !</h5>}
-              bordered={false}
-            >
+            <Card title={<h5>Register Now !</h5>} bordered={false}>
               <Form
                 name="basic"
                 initialValues={{ remember: true }}
@@ -75,15 +86,12 @@ const Register = () => {
                     { required: true, message: "Please input your password!" },
                   ]}
                 >
-                  <Input placeholder="Password"  type="password"/>
+                  <Input placeholder="Password" type="password" />
                 </Form.Item>
 
                 <Form.Item name="remember" valuePropName="checked">
                   <Checkbox>
-                    I agree the{" "}
-                    <a href="#pablo">
-                      Terms and Conditions
-                    </a>
+                    I agree the <a href="#pablo">Terms and Conditions</a>
                   </Checkbox>
                 </Form.Item>
 
@@ -97,11 +105,8 @@ const Register = () => {
                   </Button>
                 </Form.Item>
               </Form>
-              <p >
-                Already have an account?{" "}
-                <Link to="/login">
-                  Sign In
-                </Link>
+              <p>
+                Already have an account? <Link to="/login">Sign In</Link>
               </p>
             </Card>
           </Col>
@@ -111,7 +116,7 @@ const Register = () => {
             lg={{ span: 12 }}
             md={{ span: 12 }}
           >
-            <img src={registerImg} alt="" width={560}/>
+            <img src={registerImg} alt="" width={560} />
           </Col>
         </Row>
       </Content>

@@ -1,10 +1,10 @@
 import React from "react";
 import { loginApi, registerApi } from "../api/api_auth";
-import { toast } from "react-toastify";
+import {notification} from "antd"; 
 
 var UserStateContext = React.createContext<any>(null);
 var UserDispatchContext = React.createContext<any>(null);
-
+const key = 'updatable';
 function userReducer(state: any, action: any) {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -76,15 +76,28 @@ function loginUser(
         localStorage.setItem("id_token", res.data);
         setIsLoading(false);
         history.push("/app");
+        notification['success']({
+            key,
+            message: 'موفق',
+            description: "خوش آمدید :)",
+          });
         dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(() => {
         setIsLoading(false);
-        toast.error("با این مشخصات قادر به ورود نیستید");
+        notification['error']({
+            key,
+            message: 'خطا',
+            description: "با این مشخصات قادر به ورود نیستید",
+          });
       });
   } else {
     setIsLoading(false);
-    toast.error("وارد کردن همه مقادیر الزامیست");
+    notification['error']({
+        key,
+        message: 'خطا',
+        description: "وارد کردن همه مقادیر الزامیست",
+      });
   }
 }
 
@@ -105,18 +118,23 @@ function registerUser(
     registerApi(userName, email, password, fullName)
       .then((res: any) => {
         setIsLoading(false);
-        toast.success(
-          "شما به موفقیت در سامانه ثبت نام شدید ، حالا میتوانید از منوی ورود اقدام کنید"
-        );
+        history.push("/login");
+        notification['success']({
+            key,
+            message: 'موفق',
+            description: "شما به موفقیت در سامانه ثبت نام شدید ، حالا میتوانید از منوی ورود اقدام کنید",
+          });
       })
       .catch((err: any) => {
         setIsLoading(false);
-
-        toast.error(err.message);
+        notification['error']({
+            key,
+            message: 'خطا',
+            description: "یک جای کار ایراد دارد.",
+          });
       });
   } else {
     setIsLoading(false);
-    toast.error("وارد کردن همه مقادیر الزامیست");
   }
 }
 
