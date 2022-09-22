@@ -12,11 +12,15 @@ import {
 import { lazy } from "react";
 import { Link } from "react-router-dom";
 import registerImg from "../../assets/images/register.png";
+import { registerUser, useUserDispatch } from "../../context/UserContext";
 const Container = lazy(() => import("../../common/Container"));
 
 const Register = () => {
+  var userDispatch = useUserDispatch();
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
+    // registerUser(userDispatch,)
   };
 
   const onFinishFailed = (errorInfo: any) => {

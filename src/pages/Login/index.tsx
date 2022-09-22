@@ -1,15 +1,28 @@
+import React, { useState } from "react";
 import { Button, Col, Form, Input, Layout, Row, Typography } from "antd";
 import { lazy } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import singinImg from "../../assets/images/login.png";
+import { loginUser, useUserDispatch } from "../../context/UserContext";
 const Container = lazy(() => import("../../common/Container"));
 
 const Login = () => {
   const { Content } = Layout;
   const { Title } = Typography;
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  var userDispatch = useUserDispatch();
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    loginUser(
+      userDispatch,
+      values.username,
+      values.password,
+      history,
+      setIsLoading,
+      setError
+    );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -51,7 +64,7 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input placeholder="Password" />
+                <Input placeholder="Password" type="password" />
               </Form.Item>
 
               <Form.Item>
