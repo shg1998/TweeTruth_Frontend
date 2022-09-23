@@ -142,4 +142,9 @@ function signOut(dispatch: any, history: any) {
   localStorage.removeItem("id_token");
   dispatch({ type: "SIGN_OUT_SUCCESS" });
   history.push("/login");
+  notification['success']({
+    key,
+    message: 'موفق',
+    description: "شما با موفقیت خارج شدید.",
+  });
 }
