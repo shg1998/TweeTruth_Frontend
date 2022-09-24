@@ -1,9 +1,23 @@
-import { Space, Table, Tag, Pagination, Tooltip } from "antd";
+import {
+  Space,
+  Table,
+  Tag,
+  Pagination,
+  Tooltip,
+  Button,
+  Modal,
+  Input,
+} from "antd";
 import type { ColumnsType } from "antd/es/table";
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import type { PaginationProps } from "antd";
 import { getAccounts } from "../../api/api_accounts";
-import { DeleteOutlined, EditOutlined, FileOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  FileOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import "./index.css";
 
 interface DataType {
@@ -17,6 +31,9 @@ const Accounts: React.FC = () => {
   const [totalRecords, setTotalRecords] = React.useState<number>(1);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [pageSize, setPageSize] = React.useState<number>(10);
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [modalTitle, setModalTitle] = React.useState<string>("Add Username");
+  const [accountUsername, setAccountUsername] = React.useState<string>("");
 
   const columns: ColumnsType<DataType> = [
     {
@@ -78,8 +95,25 @@ const Accounts: React.FC = () => {
     },
   ];
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    console.log(accountUsername);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setAccountUsername("");
+  };
+
   const editClicked = (record: DataType): void => {
     console.log(record.id);
+    setAccountUsername(record.username);
+    setModalTitle("Edit " + record.username);
+    setIsModalOpen(true);
   };
   const deleteClicked = (record: DataType): void => {
     console.log(record.id);
@@ -117,8 +151,17 @@ const Accounts: React.FC = () => {
     setPageSize(pageSize);
   };
 
+  const onAccountUsernameChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    setAccountUsername(e.target.value);
+  };
+
   return (
     <>
+      <Button type="primary" onClick={showModal}>
+        Add Username
+      </Button>
+      <br />
+      <br />
       <Table columns={columns} dataSource={data} pagination={false} />
       <br />
       <Pagination
@@ -127,6 +170,19 @@ const Accounts: React.FC = () => {
         onChange={onChange}
         total={totalRecords}
       />
+      <Modal
+        title={modalTitle}
+        visible={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Input
+          placeholder={"Write Username ..."}
+          prefix={<UserOutlined />}
+          value={accountUsername}
+          onChange={onAccountUsernameChanged}
+        />
+      </Modal>
     </>
   );
 };
