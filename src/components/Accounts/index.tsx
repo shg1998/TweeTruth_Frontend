@@ -26,6 +26,7 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import AccountDetails from "../AccountDetails";
+import { useHistory } from "react-router-dom";
 
 interface DataType {
   id: number;
@@ -36,6 +37,7 @@ interface DataType {
 const key = "updatable";
 
 const Accounts: React.FC = () => {
+  const history = useHistory();
   const [data, setData] = React.useState<DataType[]>([]);
   const [totalRecords, setTotalRecords] = React.useState<number>(1);
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -44,8 +46,6 @@ const Accounts: React.FC = () => {
   const [modalTitle, setModalTitle] = React.useState<string>("Add Username");
   const [accountUsername, setAccountUsername] = React.useState<string>("");
   const [selectedId, setSelectedId] = React.useState<number>(0);
-  const [isDetailModalOpen, setDetailModalOpen] =
-    React.useState<boolean>(false);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -135,7 +135,8 @@ const Accounts: React.FC = () => {
         notification["error"]({
           key,
           message: "Unsuccessful",
-          description: "There was a problem in the account registration process",
+          description:
+            "There was a problem in the account registration process",
         });
       });
   };
@@ -158,7 +159,8 @@ const Accounts: React.FC = () => {
         notification["error"]({
           key,
           message: "Unsuccessful",
-          description: "There was a problem in the process of editing the account",
+          description:
+            "There was a problem in the process of editing the account",
         });
       });
   };
@@ -193,14 +195,14 @@ const Accounts: React.FC = () => {
         notification["error"]({
           key,
           message: "Unsuccessful",
-          description: "There was a problem in the process of deleting the account",
+          description:
+            "There was a problem in the process of deleting the account",
         });
       });
   };
 
   const detailsClicked = (record: DataType): void => {
-    setDetailModalOpen(true);
-    setSelectedId(record.id);
+    history.push("/app/accountDetails/" + record.id);
   };
 
   useEffect(() => {
@@ -240,10 +242,6 @@ const Accounts: React.FC = () => {
     setAccountUsername(e.target.value);
   };
 
-  const handleDetailsCancel = () => {
-    setDetailModalOpen(false);
-  };
-
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -272,14 +270,6 @@ const Accounts: React.FC = () => {
           value={accountUsername}
           onChange={onAccountUsernameChanged}
         />
-      </Modal>
-      <Modal
-        visible={isDetailModalOpen}
-        title="Details"
-        onCancel={handleDetailsCancel}
-        footer={[]}
-      >
-        <AccountDetails selectedId={selectedId}/>
       </Modal>
     </>
   );

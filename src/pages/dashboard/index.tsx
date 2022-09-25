@@ -49,33 +49,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Layout>
-        <Header className="header">
-          <Row>
-            <Col span={5}>
-              <h4
-                style={{ color: "beige", fontSize: "20px", marginTop: "20px" }}
-              >
-                TweeTruth:)
-              </h4>
-            </Col>
-            <Col span={18} />
-            <Col span={1}>
-              <h6
-                style={{
-                  color: "beige",
-                  fontSize: "15px",
-                  marginTop: "25px",
-                  cursor: "pointer",
-                }}
-                onClick={() => signOut(userDispatch, history)}
-              >
-                SignOut!
-              </h6>
-            </Col>
-          </Row>
-        </Header>
-        <Layout style={{ minHeight: minHeight }}>
+       <Layout style={{ minHeight: minHeight }}>
           <Sider width={200} className="site-layout-background">
             <Menu
               mode="inline"
@@ -97,7 +71,6 @@ const Dashboard: React.FC = () => {
             </Content>
           </Layout>
         </Layout>
-      </Layout>
     </>
   );
 };

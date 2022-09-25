@@ -75,7 +75,7 @@ function loginUser(
         console.log(res);
         localStorage.setItem("id_token", res.data.data);
         setIsLoading(false);
-        history.push("/app");
+        history.push("/app/home");
         notification["success"]({
           key,
           message: "Successfull",

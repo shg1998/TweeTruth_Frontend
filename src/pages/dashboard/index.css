@@ -5,7 +5,10 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: Helvetica Neue, Helvetica, Arial,'Motiva Sans Light', sans-serif !important;
 }
+
+
 html,
 body,
 #fullheight {

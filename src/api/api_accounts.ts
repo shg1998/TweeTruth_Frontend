@@ -9,6 +9,15 @@ export const getAccounts = (PageNumber: number, PageSize: number) => {
     });
 };
 
+export const getSpecificAccount = (id:number) => {
+  return getAxiosBase()
+    .get(`/Account/${id}`)
+    .then((res) => res.data.data)
+    .catch((err) => {
+      throw new Error(err.response.data);
+    });
+};
+
 export const addAccount = (username: string) => {
   return getAxiosBase()
     .post(`/Account`, { username })

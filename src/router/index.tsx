@@ -8,6 +8,7 @@ import React from "react";
 import Dashboard from "../pages/dashboard";
 import Login from "../pages/Login";
 import { useUserState } from "../context/UserContext";
+import CustomLayout from "../components/CustomLayout";
 
 const Router = () => {
   var {isAuthenticated} = useUserState();
@@ -27,7 +28,7 @@ const Router = () => {
             />
           );
         })}
-        <PrivateRoute path="/app" component={Dashboard} />
+        <PrivateRoute path="/app" component={CustomLayout} />
         <PublicRoute path="/login" component={Login} />
       </Switch>
       {!isAuthenticated && <Footer />}
@@ -42,7 +43,7 @@ const Router = () => {
           isAuthenticated ? (
             <Redirect
               to={{
-                pathname: "/app",
+                pathname: "/app/home",
               }}
             />
           ) : (
