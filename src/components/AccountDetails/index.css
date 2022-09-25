@@ -5,5 +5,11 @@
 
 .card {
   min-height: 100px !important;
-  margin: 3px !important;
+  margin: 4px !important;
+}
+
+.tweet-card{
+    min-height: 100px !important;
+    margin: 10px !important;
+    width: 100% !important;
 }
