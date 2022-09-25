@@ -16,7 +16,6 @@ const Router = () => {
   return (
     <Suspense fallback={null}>
       <Styles />
-      {!isAuthenticated && <Header />}
       <Switch>
         {routes.map((routeItem) => {
           return (
@@ -31,7 +30,6 @@ const Router = () => {
         <PrivateRoute path="/app" component={CustomLayout} />
         <PublicRoute path="/login" component={Login} />
       </Switch>
-      {!isAuthenticated && <Footer />}
     </Suspense>
   );
 

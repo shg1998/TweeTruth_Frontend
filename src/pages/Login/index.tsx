@@ -4,6 +4,8 @@ import { lazy } from "react";
 import { Link, useHistory } from "react-router-dom";
 import singinImg from "../../assets/images/login.png";
 import { loginUser, useUserDispatch } from "../../context/UserContext";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 const Container = lazy(() => import("../../common/Container"));
 
 const Login = () => {
@@ -14,7 +16,7 @@ const Login = () => {
   const [error, setError] = useState("");
 
   var userDispatch = useUserDispatch();
-  
+
   const onFinish = (values: any) => {
     loginUser(
       userDispatch,
@@ -31,68 +33,74 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <Content>
-        <Row gutter={[24, 0]} justify="space-around">
-          <Col xs={{ span: 24 }} lg={{ span: 12 }} md={{ span: 12 }}>
-            <Title>Sign In</Title>
-            <Title level={5}>Enter your username and password to sign in</Title>
-            <Form
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              layout="vertical"
-            >
-              <Form.Item
-                label="username"
-                name="username"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your username!",
-                  },
-                ]}
+    <>
+      <Header />
+      <Container>
+        <Content>
+          <Row gutter={[24, 0]} justify="space-around">
+            <Col xs={{ span: 24 }} lg={{ span: 12 }} md={{ span: 12 }}>
+              <Title>Sign In</Title>
+              <Title level={5}>
+                Enter your username and password to sign in
+              </Title>
+              <Form
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                layout="vertical"
               >
-                <Input placeholder="Username" />
-              </Form.Item>
-
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-              >
-                <Input placeholder="Password" type="password" />
-              </Form.Item>
-
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ width: "100%" }}
+                <Form.Item
+                  label="username"
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your username!",
+                    },
+                  ]}
                 >
-                  SIGN IN
-                </Button>
-              </Form.Item>
-              <p>
-                Don't have an account? <Link to="/register">Sign Up</Link>
-              </p>
-            </Form>
-          </Col>
-          <Col
-            style={{ padding: 12 }}
-            xs={{ span: 24 }}
-            lg={{ span: 12 }}
-            md={{ span: 12 }}
-          >
-            <img src={singinImg} alt="" width={400} />
-          </Col>
-        </Row>
-      </Content>
-    </Container>
+                  <Input placeholder="Username" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input your password!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Password" type="password" />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    style={{ width: "100%" }}
+                  >
+                    SIGN IN
+                  </Button>
+                </Form.Item>
+                <p>
+                  Don't have an account? <Link to="/register">Sign Up</Link>
+                </p>
+              </Form>
+            </Col>
+            <Col
+              style={{ padding: 12 }}
+              xs={{ span: 24 }}
+              lg={{ span: 12 }}
+              md={{ span: 12 }}
+            >
+              <img src={singinImg} alt="" width={400} />
+            </Col>
+          </Row>
+        </Content>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

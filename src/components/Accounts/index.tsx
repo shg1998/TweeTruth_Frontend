@@ -123,6 +123,7 @@ const Accounts: React.FC = () => {
         setIsModalOpen(false);
         refreshAccountTable();
         setCurrentPage(1);
+        setAccountUsername("");
         notification["success"]({
           key,
           message: "Successfull",
@@ -132,6 +133,7 @@ const Accounts: React.FC = () => {
       .catch((err) => {
         console.log(err);
         setIsModalOpen(false);
+        setAccountUsername("");
         notification["error"]({
           key,
           message: "Unsuccessful",
@@ -147,6 +149,7 @@ const Accounts: React.FC = () => {
         setIsModalOpen(false);
         refreshAccountTable();
         setCurrentPage(1);
+        setAccountUsername("");
         notification["success"]({
           key,
           message: "Successfull",
@@ -156,6 +159,7 @@ const Accounts: React.FC = () => {
       .catch((err) => {
         console.log(err);
         setIsModalOpen(false);
+        setAccountUsername("");
         notification["error"]({
           key,
           message: "Unsuccessful",

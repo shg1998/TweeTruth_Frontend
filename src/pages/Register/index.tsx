@@ -15,6 +15,8 @@ import { lazy } from "react";
 import { Link, useHistory } from "react-router-dom";
 import registerImg from "../../assets/images/register.png";
 import { registerUser, useUserDispatch } from "../../context/UserContext";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 const Container = lazy(() => import("../../common/Container"));
 
 const Register = () => {
@@ -45,6 +47,8 @@ const Register = () => {
   const { Title } = Typography;
 
   return (
+    <>
+    <Header />
     <Container>
       <Content>
         <Row gutter={[24, 0]} justify="space-around">
@@ -121,6 +125,8 @@ const Register = () => {
         </Row>
       </Content>
     </Container>
+    <Footer />
+    </>
   );
 };
 
