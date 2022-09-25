@@ -7,11 +7,12 @@ import {
   Button,
   Modal,
   Input,
+  notification,
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { ChangeEvent, useEffect } from "react";
 import type { PaginationProps } from "antd";
-import { getAccounts } from "../../api/api_accounts";
+import { addAccount, deleteAccount, editAccount, getAccounts } from "../../api/api_accounts";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -26,6 +27,8 @@ interface DataType {
   tags: string[];
 }
 
+const key = "updatable";
+
 const Accounts: React.FC = () => {
   const [data, setData] = React.useState<DataType[]>([]);
   const [totalRecords, setTotalRecords] = React.useState<number>(1);
@@ -34,6 +37,7 @@ const Accounts: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const [modalTitle, setModalTitle] = React.useState<string>("Add Username");
   const [accountUsername, setAccountUsername] = React.useState<string>("");
+  const [selectedId, setSelectedId] = React.useState<number>(0);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -97,11 +101,58 @@ const Accounts: React.FC = () => {
 
   const showModal = () => {
     setIsModalOpen(true);
+    setSelectedId(0);
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
-    console.log(accountUsername);
+    if (selectedId === 0) handleAddUsername();
+    else handleEditUsername();
+  };
+
+  const handleAddUsername = () => {
+    addAccount(accountUsername)
+      .then((res) => {
+        setIsModalOpen(false);
+        refreshAccountTable();
+        setCurrentPage(1);
+        notification["success"]({
+          key,
+          message: "موفق",
+          description: "اکانت با موفقیت ایجاد شد",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpen(false);
+        notification["error"]({
+          key,
+          message: "ناموفق",
+          description: "مشکلی در فرایند ثبت اکانت پیش آمده",
+        });
+      });
+  };
+
+  const handleEditUsername = () => {
+    editAccount(selectedId,accountUsername)
+    .then((res) => {
+      setIsModalOpen(false);
+      refreshAccountTable();
+      setCurrentPage(1);
+      notification["success"]({
+        key,
+        message: "موفق",
+        description: "اکانت با موفقیت ویرایش شد",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsModalOpen(false);
+      notification["error"]({
+        key,
+        message: "ناموفق",
+        description: "مشکلی در فرایند ویرایش اکانت پیش آمده",
+      });
+    });
   };
 
   const handleCancel = () => {
@@ -110,19 +161,44 @@ const Accounts: React.FC = () => {
   };
 
   const editClicked = (record: DataType): void => {
-    console.log(record.id);
     setAccountUsername(record.username);
     setModalTitle("Edit " + record.username);
     setIsModalOpen(true);
+    setSelectedId(record.id);
   };
+
   const deleteClicked = (record: DataType): void => {
-    console.log(record.id);
+    deleteAccount(record.id)
+    .then((res) => {
+      setIsModalOpen(false);
+      refreshAccountTable();
+      setCurrentPage(1);
+      notification["success"]({
+        key,
+        message: "موفق",
+        description: "اکانت با موفقیت حذف شد",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsModalOpen(false);
+      notification["error"]({
+        key,
+        message: "ناموفق",
+        description: "مشکلی در فرایند حذف اکانت پیش آمده",
+      });
+    });
   };
+
   const detailsClicked = (record: DataType): void => {
     console.log(record.id);
   };
 
   useEffect(() => {
+    refreshAccountTable();
+  }, [pageSize, currentPage]);
+
+  const refreshAccountTable = () => {
     getAccounts(currentPage, pageSize)
       .then((res) => {
         setData(res.items);
@@ -133,7 +209,7 @@ const Accounts: React.FC = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [pageSize, currentPage]);
+  };
 
   const onShowSizeChange: PaginationProps["onShowSizeChange"] = (
     current: number,
@@ -165,6 +241,7 @@ const Accounts: React.FC = () => {
       <Table columns={columns} dataSource={data} pagination={false} />
       <br />
       <Pagination
+        current={currentPage}
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
         onChange={onChange}
@@ -183,6 +260,7 @@ const Accounts: React.FC = () => {
           onChange={onAccountUsernameChanged}
         />
       </Modal>
+      
     </>
   );
 };

@@ -73,7 +73,7 @@ function loginUser(
     loginApi(username, password)
       .then((res: any) => {
         console.log(res)
-        localStorage.setItem("id_token", res.data);
+        localStorage.setItem("id_token", res.data.data);
         setIsLoading(false);
         history.push("/app");
         notification['success']({
