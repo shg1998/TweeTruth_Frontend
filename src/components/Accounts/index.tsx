@@ -12,7 +12,12 @@ import {
 import type { ColumnsType } from "antd/es/table";
 import React, { ChangeEvent, useEffect } from "react";
 import type { PaginationProps } from "antd";
-import { addAccount, deleteAccount, editAccount, getAccounts } from "../../api/api_accounts";
+import {
+  addAccount,
+  deleteAccount,
+  editAccount,
+  getAccounts,
+} from "../../api/api_accounts";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -20,6 +25,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import "./index.css";
+import AccountDetails from "../AccountDetails";
 
 interface DataType {
   id: number;
@@ -38,6 +44,8 @@ const Accounts: React.FC = () => {
   const [modalTitle, setModalTitle] = React.useState<string>("Add Username");
   const [accountUsername, setAccountUsername] = React.useState<string>("");
   const [selectedId, setSelectedId] = React.useState<number>(0);
+  const [isDetailModalOpen, setDetailModalOpen] =
+    React.useState<boolean>(false);
 
   const columns: ColumnsType<DataType> = [
     {
@@ -117,8 +125,8 @@ const Accounts: React.FC = () => {
         setCurrentPage(1);
         notification["success"]({
           key,
-          message: "موفق",
-          description: "اکانت با موفقیت ایجاد شد",
+          message: "Successfull",
+          description: "Account created successfully",
         });
       })
       .catch((err) => {
@@ -126,33 +134,33 @@ const Accounts: React.FC = () => {
         setIsModalOpen(false);
         notification["error"]({
           key,
-          message: "ناموفق",
-          description: "مشکلی در فرایند ثبت اکانت پیش آمده",
+          message: "Unsuccessful",
+          description: "There was a problem in the account registration process",
         });
       });
   };
 
   const handleEditUsername = () => {
-    editAccount(selectedId,accountUsername)
-    .then((res) => {
-      setIsModalOpen(false);
-      refreshAccountTable();
-      setCurrentPage(1);
-      notification["success"]({
-        key,
-        message: "موفق",
-        description: "اکانت با موفقیت ویرایش شد",
+    editAccount(selectedId, accountUsername)
+      .then((res) => {
+        setIsModalOpen(false);
+        refreshAccountTable();
+        setCurrentPage(1);
+        notification["success"]({
+          key,
+          message: "Successfull",
+          description: "Account edited successfully",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpen(false);
+        notification["error"]({
+          key,
+          message: "Unsuccessful",
+          description: "There was a problem in the process of editing the account",
+        });
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      setIsModalOpen(false);
-      notification["error"]({
-        key,
-        message: "ناموفق",
-        description: "مشکلی در فرایند ویرایش اکانت پیش آمده",
-      });
-    });
   };
 
   const handleCancel = () => {
@@ -169,29 +177,30 @@ const Accounts: React.FC = () => {
 
   const deleteClicked = (record: DataType): void => {
     deleteAccount(record.id)
-    .then((res) => {
-      setIsModalOpen(false);
-      refreshAccountTable();
-      setCurrentPage(1);
-      notification["success"]({
-        key,
-        message: "موفق",
-        description: "اکانت با موفقیت حذف شد",
+      .then((res) => {
+        setIsModalOpen(false);
+        refreshAccountTable();
+        setCurrentPage(1);
+        notification["success"]({
+          key,
+          message: "Successfull",
+          description: "Account Deleted Successfully :)",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsModalOpen(false);
+        notification["error"]({
+          key,
+          message: "Unsuccessful",
+          description: "There was a problem in the process of deleting the account",
+        });
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      setIsModalOpen(false);
-      notification["error"]({
-        key,
-        message: "ناموفق",
-        description: "مشکلی در فرایند حذف اکانت پیش آمده",
-      });
-    });
   };
 
   const detailsClicked = (record: DataType): void => {
-    console.log(record.id);
+    setDetailModalOpen(true);
+    setSelectedId(record.id);
   };
 
   useEffect(() => {
@@ -231,6 +240,10 @@ const Accounts: React.FC = () => {
     setAccountUsername(e.target.value);
   };
 
+  const handleDetailsCancel = () => {
+    setDetailModalOpen(false);
+  };
+
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -260,7 +273,14 @@ const Accounts: React.FC = () => {
           onChange={onAccountUsernameChanged}
         />
       </Modal>
-      
+      <Modal
+        visible={isDetailModalOpen}
+        title="Details"
+        onCancel={handleDetailsCancel}
+        footer={[]}
+      >
+        <AccountDetails selectedId={selectedId}/>
+      </Modal>
     </>
   );
 };

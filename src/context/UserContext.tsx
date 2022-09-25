@@ -1,10 +1,10 @@
 import React from "react";
 import { loginApi, registerApi } from "../api/api_auth";
-import {notification} from "antd"; 
+import { notification } from "antd";
 
 var UserStateContext = React.createContext<any>(null);
 var UserDispatchContext = React.createContext<any>(null);
-const key = 'updatable';
+const key = "updatable";
 function userReducer(state: any, action: any) {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -72,32 +72,32 @@ function loginUser(
   if (!!username && !!password) {
     loginApi(username, password)
       .then((res: any) => {
-        console.log(res)
+        console.log(res);
         localStorage.setItem("id_token", res.data.data);
         setIsLoading(false);
         history.push("/app");
-        notification['success']({
-            key,
-            message: 'موفق',
-            description: "خوش آمدید :)",
-          });
+        notification["success"]({
+          key,
+          message: "Successfull",
+          description: "welcome :)",
+        });
         dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(() => {
         setIsLoading(false);
-        notification['error']({
-            key,
-            message: 'خطا',
-            description: "با این مشخصات قادر به ورود نیستید",
-          });
+        notification["error"]({
+          key,
+          message: "Error",
+          description: "You are unable to log in with these credentials",
+        });
       });
   } else {
     setIsLoading(false);
-    notification['error']({
-        key,
-        message: 'خطا',
-        description: "وارد کردن همه مقادیر الزامیست",
-      });
+    notification["error"]({
+      key,
+      message: "Error",
+      description: "All values ​​must be entered",
+    });
   }
 }
 
@@ -119,19 +119,20 @@ function registerUser(
       .then((res: any) => {
         setIsLoading(false);
         history.push("/login");
-        notification['success']({
-            key,
-            message: 'موفق',
-            description: "شما به موفقیت در سامانه ثبت نام شدید ، حالا میتوانید از منوی ورود اقدام کنید",
-          });
+        notification["success"]({
+          key,
+          message: "Successfull",
+          description:
+            "You have successfully registered in the system, now you can proceed from the login menu",
+        });
       })
       .catch((err: any) => {
         setIsLoading(false);
-        notification['error']({
-            key,
-            message: 'خطا',
-            description: "یک جای کار ایراد دارد.",
-          });
+        notification["error"]({
+          key,
+          message: "Error",
+          description: "There is something wrong with the workplace",
+        });
       });
   } else {
     setIsLoading(false);
@@ -142,9 +143,9 @@ function signOut(dispatch: any, history: any) {
   localStorage.removeItem("id_token");
   dispatch({ type: "SIGN_OUT_SUCCESS" });
   history.push("/login");
-  notification['success']({
+  notification["success"]({
     key,
-    message: 'موفق',
-    description: "شما با موفقیت خارج شدید.",
+    message: "Successfull",
+    description: "You have successfully exited",
   });
 }
